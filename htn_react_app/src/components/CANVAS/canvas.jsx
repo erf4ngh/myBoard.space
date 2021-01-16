@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState }from "react";
 import ReactDOM from "react-dom";
 import CanvasDraw from "react-canvas-draw";
 import styled from "styled-components";
 
 
 
-const Canvas = () => {
+
+const Canvas = (props) => {
     return (
         <CanvasDraw 
             canvasWidth="80%"
             canvasHeight="600px"
-            hideGrid="true"
-            brushRadius="1"
-            lazyRadius="0"/>
+            hideGrid={props.grid}
+            brushRadius={props.brushRad}
+            lazyRadius="0"
+            brushColor={props.paintColour}/>
     );
 }
 
