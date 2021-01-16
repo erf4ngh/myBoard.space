@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Nav from "react-bootstrap/Nav";
 
 const CanvasPage = () => {
     const [brushColour, setBrushColour] = useState("#000000");
@@ -13,20 +14,27 @@ const CanvasPage = () => {
     const [gridHidden, setGridHidden] = useState(true);
     const [eraserMode, setEraserMode] = useState(false);
 
-    const disabledEraser = () => {
+    const enableEraser = () => {
         setBrushColour("#FFFFFF");
+        setEraserMode(true);
     }
 
     return (
         <>
-        <ButtonGroup vertical>
-        <Button onClick={() => (setEraserMode(true))}>ERASER</Button>
+        <ButtonGroup size="lg" vertical>
+        <Button onClick={enableEraser}>ERASER</Button>
         <Button>Button</Button>
 
         <DropdownButton as={ButtonGroup} title="Colour" id="bg-vertical-dropdown-1">
             <Dropdown.Item onClick={() => {
-                setBrushColour("#FF0000");
-                setEraserMode(false);
+                if (eraserMode){
+                    setEraserMode(false);
+                    setBrushColour("#FF0000");
+                }
+                else {
+                    setBrushColour("#FF0000");
+                }
+                
             }}>RED</Dropdown.Item>
             <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
         </DropdownButton>
