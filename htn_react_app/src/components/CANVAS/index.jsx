@@ -6,7 +6,46 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import Nav from "react-bootstrap/Nav";
+
+const CanvasWrapper = styled.div`
+    border: 5px solid red;
+`
+
+const CustomBtn = styled(Button)`
+    margin:5px;
+    width:30px;
+    height:30px;
+
+    &.btn-red {
+        background-color:#F31B02;
+        margin-left:14px;
+    }
+    &.btn-green {
+        background-color:#50BE64;
+    }
+    &.btn-blue {
+        background-color:#1129FF;
+    }
+    &.btn-black {
+        background-color:#000000;
+    }
+    &.btn-yellow {
+        background-color:#F8E500;
+    }
+    &.btn-purple {
+        background-color:#B221C0;
+    }
+`
+
+const ButtonWrapper = styled.div`
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+`
 
 const CanvasPage = () => {
     const [brushColour, setBrushColour] = useState("#000000");
@@ -21,42 +60,95 @@ const CanvasPage = () => {
 
     return (
         <>
-        <ButtonGroup size="lg" vertical>
-        <Button onClick={enableEraser}>ERASER</Button>
-        <Button>Button</Button>
+        <CanvasWrapper>
+            <Canvas
+                paintColour = {eraserMode ? "#FFFFFF" : brushColour}
+                brushRad = {eraserMode ? "10" : brushSize}
+                grid = {gridHidden}/>
+        </CanvasWrapper>
+        <Container>
+            <Row md={4}> 
+                <Col sm={4}>
+                <DropdownButton as={ButtonGroup} title="Colour" id="bg-vertical-dropdown-1">
+                    <ButtonWrapper>
+                        <ButtonGroup className="mr-2" aria-label="Third group">
+                            <CustomBtn variant="red" 
+                            onClick={() => {
+                            if (eraserMode){
+                                setEraserMode(false);
+                                setBrushColour("#FF0000");
+                            }
+                            else {
+                                setBrushColour("#FF0000");
+                            }}}>   
+                            </CustomBtn>
+                        </ButtonGroup>
+                        <ButtonGroup className="mr-2" aria-label="Second group">
+                            <CustomBtn variant="green"
+                            onClick={() => {
+                                if (eraserMode){
+                                    setEraserMode(false);
+                                    setBrushColour("#50BE64");
+                                }
+                                else {
+                                    setBrushColour("#50BE64");
+                                }}}></CustomBtn>
+                        </ButtonGroup>
+                        <ButtonGroup className="mr-2" aria-label="Third group">
+                            <CustomBtn variant="blue" 
+                            onClick={() => {
+                                if (eraserMode){
+                                    setEraserMode(false);
+                                    setBrushColour("#1129FF");
+                                }
+                                else {
+                                    setBrushColour("#1129FF");
+                                }}}
+                            ></CustomBtn>
+                        </ButtonGroup>
+                        <ButtonGroup className="mr-2" aria-label="Third group">
+                            <CustomBtn variant="black"
+                            onClick={() => {
+                                if (eraserMode){
+                                    setEraserMode(false);
+                                    setBrushColour("#000000");
+                                }
+                                else {
+                                    setBrushColour("#000000");
+                                }}}></CustomBtn>
+                        </ButtonGroup>
+                        <ButtonGroup className="mr-2" aria-label="Third group">
+                            <CustomBtn variant="yellow"
+                            onClick={() => {
+                                if (eraserMode){
+                                    setEraserMode(false);
+                                    setBrushColour("#F8E500");
+                                }
+                                else {
+                                    setBrushColour("#F8E500");
+                                }}}></CustomBtn>
+                        </ButtonGroup>
+                        <ButtonGroup className="mr-2" aria-label="Third group">
+                            <CustomBtn variant="purple"
+                            onClick={() => {
+                                if (eraserMode){
+                                    setEraserMode(false);
+                                    setBrushColour("#B221C0");
+                                }
+                                else {
+                                    setBrushColour("#B221C0");
+                                }}}></CustomBtn>
+                        </ButtonGroup>
+                    </ButtonWrapper>
+                </DropdownButton>
+                </Col>  
+                <Col sm={4}>
+                    <Button onClick={enableEraser}>ERASER</Button>
+                </Col>  
 
-        <DropdownButton as={ButtonGroup} title="Colour" id="bg-vertical-dropdown-1">
-            <Dropdown.Item onClick={() => {
-                if (eraserMode){
-                    setEraserMode(false);
-                    setBrushColour("#FF0000");
-                }
-                else {
-                    setBrushColour("#FF0000");
-                }
-                
-            }}>RED</Dropdown.Item>
-            <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
-        </DropdownButton>
-
-        <Button>Button</Button>
-        <Button>Button</Button>
-
-        <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-2">
-            <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
-            <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
-        </DropdownButton>
-
-        <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
-            <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
-            <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
-        </DropdownButton>
-        </ButtonGroup>
-
-        <Canvas
-            paintColour = {eraserMode ? "#FFFFFF" : brushColour}
-            brushRad = {eraserMode ? "10" : brushSize}
-            grid = {gridHidden}/>
+            </Row>
+        </Container>
+        
         </>
         
     );
