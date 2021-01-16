@@ -10,6 +10,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Nav from "react-bootstrap/Nav";
+import iconLg from "../../assets/eraser-icon-lg.svg";
 
 const CanvasWrapper = styled.div`
     border: 5px solid red;
@@ -39,6 +40,19 @@ const CustomBtn = styled(Button)`
     &.btn-purple {
         background-color:#B221C0;
     }
+    &.btn-eLarge{
+        padding:0;
+        margin-left:18px;
+        display:block;
+        text-align:center;
+    }
+
+    &.btn-eraser{
+        padding:0;
+        display:block;
+        text-align:center;
+    }
+
 `
 
 const ButtonWrapper = styled.div`
@@ -53,7 +67,8 @@ const CanvasPage = () => {
     const [gridHidden, setGridHidden] = useState(true);
     const [eraserMode, setEraserMode] = useState(false);
 
-    const enableEraser = () => {
+    const enableEraser = (size) => {
+        setBrushSize(size);
         setBrushColour("#FFFFFF");
         setEraserMode(true);
     }
@@ -63,8 +78,9 @@ const CanvasPage = () => {
         <CanvasWrapper>
             <Canvas
                 paintColour = {eraserMode ? "#FFFFFF" : brushColour}
-                brushRad = {eraserMode ? "10" : brushSize}
-                grid = {gridHidden}/>
+                brushRad = {brushSize}
+                grid = {gridHidden}
+            />
         </CanvasWrapper>
         <Container>
             <Row md={4}> 
@@ -143,9 +159,35 @@ const CanvasPage = () => {
                 </DropdownButton>
                 </Col>  
                 <Col sm={4}>
-                    <Button onClick={enableEraser}>ERASER</Button>
+                <DropdownButton as={ButtonGroup} title="Eraser" id="bg-vertical-dropdown-1">
+                    <ButtonWrapper>
+                        <ButtonGroup className="mr-2" aria-label="Third group">
+                            <CustomBtn variant="eLarge" 
+                            onClick={() => {   
+                                enableEraser("35");
+                            }}> 
+                                <img style={{height:"30px"}} src={iconLg}/>
+                            </CustomBtn>
+                        </ButtonGroup>
+                        <ButtonGroup className="mr-2" aria-label="Second group">
+                            <CustomBtn variant="eraser" 
+                                onClick={() => {   
+                                    enableEraser("20");
+                                }}> 
+                                <img style={{height:"22px"}} src={iconLg}/>
+                            </CustomBtn>
+                        </ButtonGroup>
+                        <ButtonGroup className="mr-2" aria-label="Third group">
+                            <CustomBtn variant="eraser" 
+                                onClick={() => {   
+                                    enableEraser("15");
+                                }}> 
+                                <img style={{height:"15px"}} src={iconLg}/>
+                            </CustomBtn>
+                        </ButtonGroup>
+                    </ButtonWrapper>
+                </DropdownButton>
                 </Col>  
-
             </Row>
         </Container>
         
