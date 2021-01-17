@@ -13,6 +13,7 @@ import Nav from "react-bootstrap/Nav";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import iconLg from "../../assets/eraser-icon-lg.svg";
+import app from "../../firebase";
 
 const CanvasWrapper = styled.div`
     border: 5px solid red;
@@ -67,6 +68,8 @@ const ButtonWrapper = styled.div`
 `
 
 const CanvasPage = () => {
+    const db = app.database();
+
     const [brushColour, setBrushColour] = useState("#000000");
     const [brushSize, setBrushSize] = useState("1");
     const [gridHidden, setGridHidden] = useState(true);
@@ -82,12 +85,18 @@ const CanvasPage = () => {
 
     const saveableCanvas = useRef(null);
 
+    const pushData = (lineData) => {
+        db.ref('folder1/helloWord').set({
+            data: {lineData}
+        });
+    }
+
     return (
         <>
         <CanvasWrapper>
                 <CanvasDraw 
                     onChange={() => {
-                        console.log("We drew something!")
+                        pushData(saveableCanvas.current.getSaveData());
                     }}
                     ref={saveableCanvas}
                     canvasWidth="100%"
