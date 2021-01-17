@@ -1,4 +1,4 @@
-import React, {useState, useRef, createRef} from "react";
+import React, {useState, useRef, createRef, useEffect} from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import CanvasDraw from "react-canvas-draw";
@@ -14,23 +14,38 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import app from "../../firebase";
 
+const CanvasWrapper = styled.div`
+    border: 5px solid red;
+    margin-bottom:10px;
+`
+
 const StudentCanvasView = () => {
     const db = app.database();
+    const [drawData, updateDrawData] = useState({});
+
+    const loadableCanvas = useRef(null);
+
+    useEffect(() => {
+        db.ref('folder1/helloWord/data').on('value', (snapshot) => {
+            const data = snapshot.val();
+            updateDrawData(data);
+            loadableCanvas.current.loadSaveData(data, false)
+        })
+    },[]);
 
     return (
         <>
             <CanvasWrapper>
                 <CanvasDraw 
-                    onChange={() => {
-                        pushData(saveableCanvas.current.getSaveData());
-                    }}
-                    ref={saveableCanvas}
+                    hideGrid="true"
+                    disabled="true"
+                    ref={loadableCanvas}
                     canvasWidth="100%"
                     canvasHeight="600px"
-                    hideGrid={gridHidden}
-                    brushRadius={brushSize}
-                    lazyRadius='0'
-                    brushColor={eraserMode ? "#FFFFFF" : brushColour}/>
+                    immediateLoading="false"
+                    // saveData={drawData}
+                    />
+                    
             </CanvasWrapper>
         </>
     )

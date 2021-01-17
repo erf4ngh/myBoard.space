@@ -86,7 +86,7 @@ const CanvasPage = () => {
 
     const pushData = (lineData) => {
         db.ref('folder1/helloWord').set({
-            data: {lineData}
+            data: lineData
         });
     }
 
