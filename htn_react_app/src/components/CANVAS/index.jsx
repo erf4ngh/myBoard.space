@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useRef, createRef} from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
-import Canvas from "./canvas";
+import CanvasDraw from "react-canvas-draw";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -73,14 +73,39 @@ const CanvasPage = () => {
         setEraserMode(true);
     }
 
+    const saveableCanvas = useRef(null);
+
+    // // Establish connection w Firebase
+    // if (!app.apps.length) {
+    //     app.initializeApp(firebaseConfig);
+    //     firebase = {
+    //         app: app,
+    //         database: app.database(),
+
+    //         api: {
+    //             pushDrawings
+    //         }
+    //     }
+    // }
+
+    // const pushDrawings = () => {
+    //     console.log("Push shit");
+    // }
+
     return (
         <>
         <CanvasWrapper>
-            <Canvas
-                paintColour = {eraserMode ? "#FFFFFF" : brushColour}
-                brushRad = {brushSize}
-                grid = {gridHidden}
-            />
+                <CanvasDraw 
+                    onChange={() => {
+                        console.log("We drew something!")
+                    }}
+                    ref={saveableCanvas}
+                    canvasWidth="80%"
+                    canvasHeight="600px"
+                    hideGrid={gridHidden}
+                    brushRadius={brushSize}
+                    lazyRadius='0'
+                    brushColor={eraserMode ? "#FFFFFF" : brushColour}/>
         </CanvasWrapper>
         <Container>
             <Row md={4}> 
@@ -157,7 +182,38 @@ const CanvasPage = () => {
                         </ButtonGroup>
                     </ButtonWrapper>
                 </DropdownButton>
+                </Col>
+                <Col sm={4}>
+                <DropdownButton as={ButtonGroup} title="Brush" id="bg-vertical-dropdown-1">
+                    <ButtonWrapper>
+                        <ButtonGroup className="mr-2" aria-label="Third group">
+                            <CustomBtn variant="eLarge" 
+                            onClick={() => {  
+                                setBrushSize("20");
+                            }}> 
+                                <img style={{height:"30px"}} src={iconLg}/>
+                            </CustomBtn>
+                        </ButtonGroup>
+                        <ButtonGroup className="mr-2" aria-label="Second group">
+                            <CustomBtn variant="eraser" 
+                                onClick={() => {  
+                                    setBrushSize("10");
+                                }}> 
+                                <img style={{height:"22px"}} src={iconLg}/>
+                            </CustomBtn>
+                        </ButtonGroup>
+                        <ButtonGroup className="mr-2" aria-label="Third group">
+                            <CustomBtn variant="eraser" 
+                                onClick={() => { 
+                                    setBrushSize("2");
+                                }}> 
+                                <img style={{height:"15px"}} src={iconLg}/>
+                            </CustomBtn>
+                        </ButtonGroup>
+                    </ButtonWrapper>
+                </DropdownButton>
                 </Col>  
+
                 <Col sm={4}>
                 <DropdownButton as={ButtonGroup} title="Eraser" id="bg-vertical-dropdown-1">
                     <ButtonWrapper>
@@ -187,7 +243,14 @@ const CanvasPage = () => {
                         </ButtonGroup>
                     </ButtonWrapper>
                 </DropdownButton>
-                </Col>  
+                </Col> 
+                <Col>
+                    <Button variant="outline-danger" 
+                    onClick = {() => {
+                        saveableCanvas.current.clear();
+                    }}>Erase All</Button>
+                </Col>
+                 
             </Row>
         </Container>
         
