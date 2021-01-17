@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
-import Logo from '../../assets/logo.svg';
+import Logo from '../../assets/logo2.svg';
 import Button from 'react-bootstrap/Button';
 import SS from '../../assets/ss.png';
 import Email from '../../assets/email.svg';
@@ -69,16 +69,20 @@ const CustomImg = styled.img`
     margin-bottom:40px;
 }
 `
+const CustomImg2 = styled.img`
+    margin-Top:40px;
+}
+`
 
 const Homepage = () => {
     return (
         <CustomDiv>
             <Container>
                 <Row className="justify-content-center">
-                    <Col className="pr-0 mt-" md="auto">
-                    <img src={Logo} width="300" height="300"/>
+                    <Col md="auto">
+                        <CustomImg2 src={Logo} width="200" height="200"/>
                     </Col>
-                    <Col className="pl-0 align-self-end" md="auto">
+                    <Col className="align-self-end" md="auto">
                         <div>
                             <CustomH1 className="big2">myBoard</CustomH1>
                         </div>
