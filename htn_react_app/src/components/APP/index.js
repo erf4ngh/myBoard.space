@@ -4,17 +4,23 @@ import Homepage from "../HOMEPAGE/index.jsx";
 import CanvasPage from "../CANVAS/index.jsx";
 import StudentCanvasView from "../STUDENT_CANVAS/index.jsx";
 
+import UserAppContext from "../../libs/contextLibs";
+
+
+
 const App = () => {
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={Homepage}/>
-          <Route path="/canvas" component={CanvasPage}/>
-          <Route path="/student" component={StudentCanvasView}/>
-        </Switch>
-      </div>
-    </Router>    
+    <UserAppContext>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route exact path="/" component={Homepage}/>
+            <Route path="/canvas" component={CanvasPage}/>
+            <Route path="/student" component={StudentCanvasView}/>
+          </Switch>
+        </div>
+      </Router>    
+    </UserAppContext>
   );
 }
 

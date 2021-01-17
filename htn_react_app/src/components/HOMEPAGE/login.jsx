@@ -1,11 +1,10 @@
-import React from "react";
+import React, {useState, useEffect, useContext} from "react";
 import styled from "styled-components";
 import GoogleLogin from 'react-google-login';
 import logo from "../../assets/google_logo.svg";
-
-const responseGoogle = (response) => {
-    console.log(response);
-}
+import UserContext from "../../libs/contextLibs";
+import { signInWithGoogle } from "../../firebase";
+import { Redirect } from 'react-router-dom';
 
 const StyledButton = styled.button`
     margin:20px 0 20px 0;
@@ -26,20 +25,19 @@ const StyledBtnText = styled.p`
 `
 
 const GoogleLogDiv = () => {
+    const user  = useContext(UserContext);
+    
+    // useEffect(() => {
+    //     if (user) {
+    //       <Redirect to='/canvas'/>
+    //     }
+    //   }, []);
+
     return (    
-        <GoogleLogin
-            clientId="1090281374340-065beqt8a17t00k6c1q9v1endlblhs1b.apps.googleusercontent.com"
-            render={renderProps => (
-            <StyledButton onClick={renderProps.onClick} disabled={renderProps.disabled}>
+            <StyledButton onClick={signInWithGoogle}>
                 <img style={{height:"30px"}}src={logo}/>
                 <StyledBtnText>Sign in with Google</StyledBtnText>
             </StyledButton>
-            )}
-            buttonText="Login to Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={'single_host_origin'}
-        />
     )
 }
 
