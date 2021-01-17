@@ -71,6 +71,7 @@ const CustomImg2 = styled.img`
 `
 
 const Homepage = () => {
+    document.title = "myBoard.space - Home"
     return (
         <CustomDiv>
             <Container>

@@ -129,6 +129,7 @@ const CanvasPage = () => {
         });
     }
 
+    document.title = "myBoard.space - Teacher"
     // const delData = () => {
     //     db.ref('folder1/helloWord').set({
     //         data:""

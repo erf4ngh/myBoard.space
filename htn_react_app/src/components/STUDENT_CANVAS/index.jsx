@@ -76,6 +76,7 @@ const StudentCanvasView = () => {
         })
     },[]);
 
+    document.title = "myBoard.space - Student"
     return (
         <CustomDiv>
             <Container>
