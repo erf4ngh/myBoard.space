@@ -85,7 +85,7 @@ const CanvasPage = () => {
     const saveableCanvas = useRef(null);
 
     const pushData = (lineData) => {
-        db.ref('folder1/helloWord').set({
+        db.ref('folder1/helloWord').update({
             data: lineData
         });
     }

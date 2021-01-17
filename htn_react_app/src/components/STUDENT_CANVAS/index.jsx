@@ -29,7 +29,7 @@ const StudentCanvasView = () => {
         db.ref('folder1/helloWord/data').on('value', (snapshot) => {
             const data = snapshot.val();
             updateDrawData(data);
-            loadableCanvas.current.loadSaveData(data, false)
+            loadableCanvas.current.loadSaveData(data, true)
         })
     },[]);
 
