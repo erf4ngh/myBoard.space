@@ -50,14 +50,12 @@ const CustomBtn = styled(Button)`
         margin-left:10px;
         display:block;
         text-align:center;
-        border: 1px solid black;
     }
 
     &.btn-eraser{
         padding:0;
         display:block;
         text-align:center;
-        border: 1px solid black;
     }
 `
 const Logoutbtn =styled(Button)`
