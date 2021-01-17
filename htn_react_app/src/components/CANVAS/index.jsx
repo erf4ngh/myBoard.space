@@ -15,6 +15,7 @@ import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import iconLg from "../../assets/eraser-icon-lg.svg";
 import app from "../../firebase";
 import Logo from '../../assets/logo2.svg';
+import {Redirect} from "react-router-dom";
 
 const CanvasWrapper = styled.div`
     border: 5px solid #B0BEC9;
@@ -59,6 +60,7 @@ const CustomBtn = styled(Button)`
     }
 `
 const Logoutbtn =styled(Button)`
+    margin-top:60px;
     padding:20 px;
     width: 60 px;
     &.btn-primary,&.btn-primary:active:focus, &.btn-primary:active, &.btn-primary:focus, &.btn-primary:visited {
@@ -112,6 +114,10 @@ const CanvasPage = () => {
     const [brushSize, setBrushSize] = useState("1");
     const [gridHidden, setGridHidden] = useState(true);
     const [eraserMode, setEraserMode] = useState(false);
+    const [redirect, setredirect] = useState(null)
+
+    
+    
 
     const enableEraser = () => {
         setEraserMode(true);
@@ -123,6 +129,10 @@ const CanvasPage = () => {
 
     const saveableCanvas = useRef(null);
 
+    if (redirect) {
+        return(<Redirect to={redirect}/>)
+    }
+
     const pushData = (lineData) => {
         db.ref('folder1/helloWord').update({
             data: lineData
@@ -130,11 +140,6 @@ const CanvasPage = () => {
     }
 
     document.title = "myBoard.space - Teacher"
-    // const delData = () => {
-    //     db.ref('folder1/helloWord').set({
-    //         data:""
-    //     });
-    // }
 
     return (
         <CustomDiv>
@@ -152,7 +157,9 @@ const CanvasPage = () => {
                         </div>
                     </Col>
                     <Col xs="auto" className="ml-auto">
-                        <Logoutbtn variant="primary"><CustomH1 className="logout">Logout</CustomH1></Logoutbtn>
+                        <Logoutbtn onClick={() => {
+                            setredirect('/');
+                        }} variant="primary"><CustomH1 className="logout">Logout</CustomH1></Logoutbtn>
                     </Col>
                 </Row>
                 <CanvasWrapper>
@@ -279,34 +286,6 @@ const CanvasPage = () => {
                         </svg>
                     </ToggleButton>
                 </ToggleButtonGroup>
-                {/* <DropdownButton size="lg" as={ButtonGroup} title="Eraser" id="bg-vertical-dropdown-1">
-                    <ButtonWrapper>
-                        <ButtonGroup className="mr-2" aria-label="Third group">
-                            <CustomBtn variant="eLarge" 
-                            onClick={() => {   
-                                enableEraser("35");
-                            }}> 
-                                <img style={{height:"30px"}} src={iconLg}/>
-                            </CustomBtn>
-                        </ButtonGroup>
-                        <ButtonGroup className="mr-2" aria-label="Second group">
-                            <CustomBtn variant="eraser" 
-                                onClick={() => {   
-                                    enableEraser("20");
-                                }}> 
-                                <img style={{height:"22px"}} src={iconLg}/>
-                            </CustomBtn>
-                        </ButtonGroup>
-                        <ButtonGroup className="mr-2" aria-label="Third group">
-                            <CustomBtn variant="eraser" 
-                                onClick={() => {   
-                                    enableEraser("15");
-                                }}> 
-                                <img style={{height:"15px"}} src={iconLg}/>
-                            </CustomBtn>
-                        </ButtonGroup>
-                    </ButtonWrapper>
-                </DropdownButton> */}
                 </Col> 
                 <Col>
                     <Button size="lg" variant="outline-danger" 
@@ -328,7 +307,9 @@ const CanvasPage = () => {
                         </svg>
                   </Button>
                 </Col>
-                 
+            </Row>
+            <Row>
+                <p></p>
             </Row>
         </Container>
         </CustomDiv>

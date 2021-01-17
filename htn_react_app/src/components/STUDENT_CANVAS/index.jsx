@@ -14,6 +14,7 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import app from "../../firebase";
 import Logo from '../../assets/logo2.svg';
+import {Redirect} from "react-router-dom";
 
 const CanvasWrapper = styled.div`
     border: 5px solid #B0BEC9;
@@ -21,6 +22,7 @@ const CanvasWrapper = styled.div`
 `
 
 const Logoutbtn =styled(Button)`
+    margin-top:60px;
     padding:20 px;
     width: 60 px;
     &.btn-primary,&.btn-primary:active:focus, &.btn-primary:active, &.btn-primary:focus, &.btn-primary:visited {
@@ -65,8 +67,10 @@ const LogoImg = styled.img`
 const StudentCanvasView = () => {
     const db = app.database();
     const [drawData, updateDrawData] = useState({});
+    const [redirect, setredirect] = useState(null)
 
     const loadableCanvas = useRef(null);
+
 
     useEffect(() => {
         db.ref('folder1/helloWord/data').on('value', (snapshot) => {
@@ -75,6 +79,10 @@ const StudentCanvasView = () => {
             loadableCanvas.current.loadSaveData(data, true)
         })
     },[]);
+
+    if (redirect) {
+        return(<Redirect to={redirect}/>)
+    }
 
     document.title = "myBoard.space - Student"
     return (
@@ -93,7 +101,9 @@ const StudentCanvasView = () => {
                         </div>
                     </Col>
                     <Col xs="auto" className="ml-auto">
-                        <Logoutbtn variant="primary"><CustomH1 className="logout">Logout</CustomH1></Logoutbtn>
+                        <Logoutbtn onClick={() => {
+                            setredirect('/');
+                        }} variant="primary"><CustomH1 className="logout">Logout</CustomH1></Logoutbtn>
                     </Col>
                 </Row>
                 <CanvasWrapper>
@@ -104,6 +114,7 @@ const StudentCanvasView = () => {
                     canvasWidth="100%"
                     canvasHeight="600px"
                     immediateLoading="false"
+                    hideInterface="true"
                     // saveData={drawData}
                     />   
                 </CanvasWrapper>

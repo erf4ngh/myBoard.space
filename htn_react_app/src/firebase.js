@@ -1,15 +1,17 @@
 import firebase from "firebase"
 import {useContext} from "react";
+import dotenv from 'dotenv';
+dotenv.config()
   
 const config = {
-    apiKey: "AIzaSyBzomlUxgKyMMmxljimlkyRUt_RiSQ-zMI",
-    authDomain: "htn2020-a7cfc.firebaseapp.com",
-    databaseURL: "https://htn2020-a7cfc-default-rtdb.firebaseio.com",
-    projectId: "htn2020-a7cfc",
-    storageBucket: "htn2020-a7cfc.appspot.com",
-    messagingSenderId: "1090281374340",
-    appId: "1:1090281374340:web:6c21b084f22fe5f53c38d1",
-    measurementId: "G-02G10RSQ7E"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 const app = firebase.initializeApp(config)
