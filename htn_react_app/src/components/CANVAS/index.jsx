@@ -58,7 +58,6 @@ const CustomBtn = styled(Button)`
         text-align:center;
         border: 1px solid black;
     }
-
 `
 
 const ButtonWrapper = styled.div`
