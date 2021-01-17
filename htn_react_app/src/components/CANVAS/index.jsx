@@ -90,6 +90,12 @@ const CanvasPage = () => {
         });
     }
 
+    // const delData = () => {
+    //     db.ref('folder1/helloWord').set({
+    //         data:""
+    //     });
+    // }
+
     return (
         <>
         <CanvasWrapper>
@@ -247,6 +253,7 @@ const CanvasPage = () => {
                 <Col>
                     <Button size="lg" variant="outline-danger" 
                     onClick = {() => {
+                        //delData();
                         saveableCanvas.current.clear();
                     }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
