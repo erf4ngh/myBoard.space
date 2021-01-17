@@ -1,5 +1,6 @@
 import firebase from "firebase"
-
+import {useContext} from "react";
+  
 const config = {
     apiKey: "AIzaSyBzomlUxgKyMMmxljimlkyRUt_RiSQ-zMI",
     authDomain: "htn2020-a7cfc.firebaseapp.com",

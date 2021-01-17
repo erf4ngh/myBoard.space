@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from "react";
 import styled from "styled-components";
 import GoogleLogin from 'react-google-login';
 import logo from "../../assets/google_logo.svg";
-import UserContext from "../../libs/contextLibs";
+import useUserContext from "../../libs/contextLibs";
 import { signInWithGoogle } from "../../firebase";
 import { Redirect } from 'react-router-dom';
 
@@ -25,19 +25,23 @@ const StyledBtnText = styled.p`
 `
 
 const GoogleLogDiv = () => {
-    const user  = useContext(UserContext);
-    
-    // useEffect(() => {
-    //     if (user) {
-    //       <Redirect to='/canvas'/>
-    //     }
-    //   }, []);
+    const user  = useContext(useUserContext);
+    const [redirect, setredirect] = useState(null)
+
+    if (redirect) {
+        return(<Redirect to={redirect}/>)
+    }
 
     return (    
-            <StyledButton onClick={signInWithGoogle}>
-                <img style={{height:"30px"}}src={logo}/>
-                <StyledBtnText>Sign in with Google</StyledBtnText>
-            </StyledButton>
+        <StyledButton onClick={() => {
+            signInWithGoogle();
+            setTimeout(() => {
+                setredirect('/select-role');
+            }, 6000);
+            }}>
+            <img style={{height:"30px"}}src={logo}/>
+            <StyledBtnText>Sign in with Google</StyledBtnText>
+        </StyledButton>
     )
 }
 
