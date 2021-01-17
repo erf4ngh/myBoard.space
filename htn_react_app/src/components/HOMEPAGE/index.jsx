@@ -29,16 +29,17 @@ const CustomH1 = styled.h1`
         margin-bottom:20px;
     }
     &.small {
-        font-size: 22px;
+        font-size: 24px;
         font-weight: lighter;
         margin-bottom:20px;
     }
     &.big2 {
         margin-top:50px;
-        font-size: 40px;
+        font-size: 50px;
+        margin-bottom:0px;
     }
     &.small2 {
-        font-size: 32px;
+        font-size: 36px;
         font-weight: lighter;
         margin-bottom: 65px;
     }
@@ -51,38 +52,33 @@ const CustomH1 = styled.h1`
         font-weight: lighter;
         margin-bottom: 10px;
     }
-}
 `
 
 const CustomHr = styled.hr`
-    border: 1px solid black;
-}
+    border: 2px solid #E3F1FD;
 `
 
 const CustomDiv = styled.div`
-    background-color: #E4F1FD;
-    height: 100%;
-}
+    background-color: #FFFFFF;
+    height: 100vh;
 `
 
 const CustomImg = styled.img`
     margin-bottom:40px;
-}
 `
 const CustomImg2 = styled.img`
     margin-Top:40px;
-}
 `
 
 const Homepage = () => {
     return (
         <CustomDiv>
             <Container>
-                <Row className="justify-content-center">
-                    <Col md="auto">
+                <Row style={{alignItems:"center"}} className="justify-content-center">
+                    <Col style={{paddingRight:"0px"}} md="auto">
                         <CustomImg2 src={Logo} width="200" height="200"/>
                     </Col>
-                    <Col className="align-self-end" md="auto">
+                    <Col style={{paddingLeft:"0px"}} className="align-self-end" md="auto">
                         <div>
                             <CustomH1 className="big2">myBoard</CustomH1>
                         </div>
@@ -106,21 +102,12 @@ const Homepage = () => {
                     <br/>
                 </Row>
                 <Row className="justify-content-center">
-                    <CustomImg src={SS}/>
+                    
                 </Row>
             </Container>
             <Container>
                 <Row className="justify-content-center">
                     <CustomHr width="60%"/>
-                </Row>
-                <Row className="justify-content-center">
-                    <CustomH1 className="big3">Need Technical Assistance?</CustomH1>
-                </Row>
-                <Row className="justify-content-center">
-                    <CustomH1 className="small3">Contact us at myBoardspace@outlook.ca</CustomH1>
-                </Row>
-                <Row className="justify-content-center">
-                    <img src={Email} width="100"/>
                 </Row>
             </Container>
         </CustomDiv>
