@@ -14,9 +14,10 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import iconLg from "../../assets/eraser-icon-lg.svg";
 import app from "../../firebase";
+import Logo from '../../assets/logo2.svg';
 
 const CanvasWrapper = styled.div`
-    border: 5px solid red;
+    border: 5px solid #B0BEC9;
     margin-bottom:10px;
 `
 
@@ -46,7 +47,7 @@ const CustomBtn = styled(Button)`
     }
     &.btn-eLarge{
         padding:0;
-        margin-left:18px;
+        margin-left:10px;
         display:block;
         text-align:center;
         border: 1px solid black;
@@ -59,11 +60,51 @@ const CustomBtn = styled(Button)`
         border: 1px solid black;
     }
 `
+const Logoutbtn =styled(Button)`
+    padding:20 px;
+    width: 60 px;
+    &.btn-primary,&.btn-primary:active:focus, &.btn-primary:active, &.btn-primary:focus, &.btn-primary:visited {
+        border: 0px;
+        background-color: #B0BEC9; 
+        !important;
+    }
+
+    &.btn-primary:hover{
+        border: 0px;
+        color: #000000;
+        background-color: #E2F1FC; 
+        !important;
+    }
+}
+`
 
 const ButtonWrapper = styled.div`
     display:flex;
     align-items:center;
-    justify-content:space-around;
+`
+
+const CustomDiv = styled.div`
+    height: 100vh;
+}
+`
+const CustomH1 = styled.h1`
+    &.title {
+        margin-top:50px;
+        font-size: 40px;
+    }
+    &.subtitle {
+        font-size: 32px;
+        font-weight: lighter;
+        margin-bottom: 65px;
+    }
+
+    &.logout {
+        font-size: 30px;
+    }
+}`
+
+const LogoImg = styled.img`
+    margin-Top:40px;
 `
 
 const CanvasPage = () => {
@@ -97,23 +138,41 @@ const CanvasPage = () => {
     // }
 
     return (
-        <>
-        <CanvasWrapper>
-                <CanvasDraw 
-                    onChange={() => {
-                        pushData(saveableCanvas.current.getSaveData());
-                    }}
-                    ref={saveableCanvas}
-                    canvasWidth="100%"
-                    canvasHeight="600px"
-                    hideGrid={gridHidden}
-                    brushRadius={brushSize}
-                    lazyRadius='0'
-                    brushColor={eraserMode ? "#FFFFFF" : brushColour}/>
-        </CanvasWrapper>
-        <Container>
-            <Row md={5}> 
-                <Col sm={4}>
+        <CustomDiv>
+            <Container>
+                <Row> 
+                    <Col xs="auto">
+                        <LogoImg src={Logo} width="150" height="150"/>
+                    </Col>
+                    <Col className="align-self-end" xs="auto">
+                        <div>
+                            <CustomH1 className="title">myBoard</CustomH1>
+                        </div>
+                        <div>
+                            <CustomH1 className="subtitle">.space</CustomH1>
+                        </div>
+                    </Col>
+                    <Col xs="auto" className="ml-auto">
+                        <Logoutbtn variant="primary"><CustomH1 className="logout">Logout</CustomH1></Logoutbtn>
+                    </Col>
+                </Row>
+                <CanvasWrapper>
+                        <CanvasDraw 
+                        onChange={() => {
+                            pushData(saveableCanvas.current.getSaveData());
+                        }}
+                        ref={saveableCanvas}
+                        canvasWidth="100%"
+                        canvasHeight="600px"
+                        hideGrid={gridHidden}
+                        brushRadius={brushSize}
+                        lazyRadius='0'
+                        brushColor={eraserMode ? "#FFFFFF" : brushColour}/>
+                </CanvasWrapper>
+            </Container>
+            <Container>
+                <Row> 
+                    <Col xs="auto">
                     <ButtonWrapper>
                         <ButtonGroup className="mr-2" aria-label="Third group">
                             <CustomBtn variant="red" 
@@ -179,7 +238,7 @@ const CanvasPage = () => {
                         </ButtonGroup>
                     </ButtonWrapper>
                 </Col>
-                <Col sm={4}>
+                <Col xs="auto">
                     <ButtonWrapper>
                         <ButtonGroup className="mr-2" aria-label="Third group">
                             <CustomBtn variant="eLarge" 
@@ -208,7 +267,7 @@ const CanvasPage = () => {
                     </ButtonWrapper>
                 </Col>  
 
-                <Col sm={4}>
+                <Col xs="auto">
                 <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
                     <ToggleButton value={1} onClick={disableEraser}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-brush" viewBox="0 0 16 16">
@@ -273,8 +332,7 @@ const CanvasPage = () => {
                  
             </Row>
         </Container>
-        
-        </>
+        </CustomDiv>
         
     );
 }
