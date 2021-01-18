@@ -9,13 +9,13 @@ An online whiteboard. Essentially, the host of a session will have a paint-like 
 
 ## How We Built It
 
-**Preliminary Design**
+**Preliminary Design**<br/>
 Much of our focus was directed towards making a simple UI, with only the core features needed to execute a whiteboard app - we devised mockups on Figma, and created some many of the icons used in our app using Adobe Illustrator. 
 
-**Frontend**
+**Frontend**<br/>
 For it's simplicity and ease of development, we chose to implement our front-end through the use of React. The use of React also allowed us to implement the Canvas component - the core of our project - along with the many paint tools required to be able to interact with it. 
 
-**Serverless-Backend**
+**Serverless-Backend**<br/>
 To aid in the realtime functionality of our app, we utilized Firebase's Realtime Database, which allowed us to constantly update a viewer's screen (their canvas) with the newly drawn components within a second. Firebase's seamless integration with React through its other features, such as FirebaseAuth, made it the ideal choice overall for our project. Ultimately, we also utilized Firebase's hosting service to deploy our web app.
 
 ## Usage
